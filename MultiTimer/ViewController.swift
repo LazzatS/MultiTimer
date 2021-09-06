@@ -7,11 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     let scrollView = UIScrollView()
     let contentView = UIView()
     let viewTitle = UILabel()
+    let timerName = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         setupScrollView()
         createViewTitle()
+        createTextFieldForNewTimerName()
     }
     
     func setupScrollView(){
@@ -62,6 +64,27 @@ class ViewController: UIViewController {
         border.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         border.frame = CGRect(x: -20, y: uiView.frame.size.height - 15, width: uiView.frame.size.width + 20, height: borderWidth)
         uiView.addSubview(border)
+    }
+    
+    func createTextFieldForNewTimerName() {
+        timerName.backgroundColor = UIColor(named: "CustomLightGray")
+        timerName.placeholder = "Название таймера"
+        timerName.layer.borderWidth = 1
+        timerName.layer.borderColor = UIColor.secondaryLabel.cgColor
+        timerName.layer.cornerRadius = 5
+        contentView.addSubview(timerName)
+        
+        timerName.autocorrectionType = UITextAutocorrectionType.no
+        timerName.keyboardType = UIKeyboardType.default
+        timerName.returnKeyType = UIReturnKeyType.done
+        timerName.becomeFirstResponder()
+        timerName.delegate = self
+        
+        timerName.translatesAutoresizingMaskIntoConstraints = false
+        timerName.topAnchor.constraint(equalTo: viewTitle.bottomAnchor, constant: 20).isActive = true
+        timerName.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 22).isActive = true
+        timerName.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -150).isActive = true
+        timerName.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }
 
