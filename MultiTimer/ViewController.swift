@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let contentView = UIView()
     let viewTitle = UILabel()
     let timerName = UITextField()
+    let timerSeconds = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         setupScrollView()
         createViewTitle()
         createTextFieldForNewTimerName()
+        createTextFieldForTimerInSeconds()
     }
     
     func setupScrollView(){
@@ -85,6 +87,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         timerName.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 22).isActive = true
         timerName.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -150).isActive = true
         timerName.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    func createTextFieldForTimerInSeconds() {
+        timerSeconds.backgroundColor = UIColor(named: "CustomLightGray")
+        timerSeconds.placeholder = "Время в секундах"
+        timerSeconds.layer.borderWidth = 1
+        timerSeconds.layer.borderColor = UIColor.secondaryLabel.cgColor
+        timerSeconds.layer.cornerRadius = 5
+        contentView.addSubview(timerSeconds)
+        
+        timerSeconds.autocorrectionType = UITextAutocorrectionType.no
+        timerSeconds.keyboardType = UIKeyboardType.default
+        timerSeconds.returnKeyType = UIReturnKeyType.done
+        timerSeconds.becomeFirstResponder()
+        timerSeconds.delegate = self
+        
+        timerSeconds.translatesAutoresizingMaskIntoConstraints = false
+        timerSeconds.topAnchor.constraint(equalTo: timerName.bottomAnchor, constant: 10).isActive = true
+        timerSeconds.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 22).isActive = true
+        timerSeconds.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -150).isActive = true
+        timerSeconds.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }
 
