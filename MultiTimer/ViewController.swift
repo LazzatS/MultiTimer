@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let timerName = UITextField()
     let timerSeconds = UITextField()
     let addButton = UIButton()
+    let timersVC = TimersChildViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         createTextFieldForNewTimerName()
         createTextFieldForTimerInSeconds()
         createAddButton()
+        addTimersChildViewController()
     }
     
     func setupScrollView(){
@@ -126,7 +128,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         addButton.topAnchor.constraint(equalTo: timerSeconds.bottomAnchor, constant: 30).isActive = true
         addButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        addButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+    }
+    
+    func addTimersChildViewController() {
+        addChild(timersVC)
+        view.addSubview(timersVC.view)
+        timersVC.didMove(toParent: self)
+        
+        timersVC.view.translatesAutoresizingMaskIntoConstraints = false
+        timersVC.view.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 40).isActive = true
+        timersVC.view.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
+        timersVC.view.heightAnchor.constraint(equalToConstant: timersVC.view.frame.size.height).isActive = true
+        timersVC.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
     }
     
     @objc func addTimer() {

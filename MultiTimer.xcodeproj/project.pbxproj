@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122A5CFC26E779DD00D54FBC /* TimersChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A5CFB26E779DD00D54FBC /* TimersChildViewController.swift */; };
 		12EB12B126E6323000281488 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB12B026E6323000281488 /* AppDelegate.swift */; };
 		12EB12B326E6323000281488 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB12B226E6323000281488 /* SceneDelegate.swift */; };
 		12EB12B526E6323000281488 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB12B426E6323000281488 /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		122A5CFB26E779DD00D54FBC /* TimersChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersChildViewController.swift; sourceTree = "<group>"; };
 		12EB12AD26E6322F00281488 /* MultiTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EB12B026E6323000281488 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12EB12B226E6323000281488 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				12EB12B926E6323C00281488 /* Assets.xcassets */,
 				12EB12BB26E6323C00281488 /* LaunchScreen.storyboard */,
 				12EB12BE26E6323C00281488 /* Info.plist */,
+				122A5CFB26E779DD00D54FBC /* TimersChildViewController.swift */,
 			);
 			path = MultiTimer;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				122A5CFC26E779DD00D54FBC /* TimersChildViewController.swift in Sources */,
 				12EB12B526E6323000281488 /* ViewController.swift in Sources */,
 				12EB12B126E6323000281488 /* AppDelegate.swift in Sources */,
 				12EB12B326E6323000281488 /* SceneDelegate.swift in Sources */,
