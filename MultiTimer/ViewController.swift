@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let viewTitle = UILabel()
     let timerName = UITextField()
     let timerSeconds = UITextField()
+    let addButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         createViewTitle()
         createTextFieldForNewTimerName()
         createTextFieldForTimerInSeconds()
+        createAddButton()
     }
     
     func setupScrollView(){
@@ -108,6 +110,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         timerSeconds.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 22).isActive = true
         timerSeconds.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -150).isActive = true
         timerSeconds.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    func createAddButton() {
+        addButton.setTitle("Добавить", for: .normal)
+        addButton.setTitleColor(.systemBlue, for: .normal)
+        addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        addButton.backgroundColor = UIColor(named: "CustomLightGray")
+        addButton.layer.cornerRadius = 10
+        addButton.addTarget(self, action: #selector(addTimer), for: .touchUpInside)
+        contentView.addSubview(addButton)
+        
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        addButton.topAnchor.constraint(equalTo: timerSeconds.bottomAnchor, constant: 30).isActive = true
+        addButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+    }
+    
+    @objc func addTimer() {
+        print("add timer tapped")
     }
 }
 
