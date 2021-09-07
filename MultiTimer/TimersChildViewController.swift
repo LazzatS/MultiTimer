@@ -13,7 +13,9 @@ class TimersChildViewController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
         view.frame.size.height = 200
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TimersHeader.self, forHeaderFooterViewReuseIdentifier: "header")
+        tableView.sectionHeaderHeight = 40
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,4 +26,62 @@ class TimersChildViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        return header
+    }
+}
+
+class TimersHeader: UITableViewHeaderFooterView {
+    
+    let timersHeaderName: UILabel = {
+        let label = UILabel()
+        label.text = "Таймеры"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .secondaryLabel
+        return label
+    }()
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        addSubview(timersHeaderName)
+        timersHeaderName.translatesAutoresizingMaskIntoConstraints = false
+        timersHeaderName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        timersHeaderName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+    }
+}
+
+class CustomCell: UITableViewCell {
+    
+    let timerName: UILabel = {
+        let label = UILabel()
+        label.text = "Timer item"
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        addSubview(timerName)
+        timerName.translatesAutoresizingMaskIntoConstraints = false
+        timerName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        timerName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+    }
+    
 }
