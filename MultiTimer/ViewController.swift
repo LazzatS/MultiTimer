@@ -28,6 +28,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         createTextFieldForTimerInSeconds()
         createAddButton()
         addTimersChildViewController()
+        timers = UserDefaults.standard.stringArray(forKey: "timerNames")!
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        timersVC.timersSaved = timers
+        timersVC.tableView.reloadData()
     }
     
     func setupScrollView(){
@@ -148,6 +155,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             timers.append(newTimerName)
             timersVC.timersSaved = timers
             timersVC.tableView.reloadData()
+            UserDefaults.standard.set(timers, forKey: "timerNames")
         }
     }
 }
