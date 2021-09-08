@@ -8,7 +8,9 @@
 import UIKit
 
 class TimersChildViewController: UITableViewController {
-
+    
+    var timersSaved = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
@@ -19,11 +21,12 @@ class TimersChildViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return timersSaved.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
+        cell.timerName.text = timersSaved[indexPath.row]
         return cell
     }
     

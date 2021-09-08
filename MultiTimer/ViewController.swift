@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let timerSeconds = UITextField()
     let addButton = UIButton()
     let timersVC = TimersChildViewController()
+    var timers = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +144,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func addTimer() {
-        print("add timer tapped")
+        if let newTimerName = timerName.text, !newTimerName.isEmpty {
+            timers.append(newTimerName)
+            timersVC.timersSaved = timers
+            timersVC.tableView.reloadData()
+        }
     }
 }
 
