@@ -127,7 +127,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(timerSeconds)
         
         timerSeconds.autocorrectionType = UITextAutocorrectionType.no
-        timerSeconds.keyboardType = UIKeyboardType.default
+        timerSeconds.keyboardType = UIKeyboardType.numberPad
         timerSeconds.returnKeyType = UIReturnKeyType.done
         timerSeconds.becomeFirstResponder()
         timerSeconds.delegate = self
