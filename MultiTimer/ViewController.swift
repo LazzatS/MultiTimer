@@ -44,6 +44,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             timers.remove(at: 0)
         }
         
+        let tapAnywhereOnScreen = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapAnywhereOnScreen)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,6 +181,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         timerName.text = ""
         timerSeconds.text = ""
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
