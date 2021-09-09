@@ -9,7 +9,8 @@ import UIKit
 
 class TimersChildViewController: UITableViewController {
     
-    var timersSaved = [String]()
+    var timersSaved: [(name: String, seconds: String)] = []
+    var secondsSaved = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,8 @@ class TimersChildViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
-        cell.timerName.text = timersSaved[indexPath.row]
+        cell.timerName.text = timersSaved[indexPath.row].name
+        cell.timerSeconds.text = timersSaved[indexPath.row].seconds
         return cell
     }
     
@@ -67,8 +69,13 @@ class CustomCell: UITableViewCell {
     
     let timerName: UILabel = {
         let label = UILabel()
-        label.text = "Timer item"
         return label
+    }()
+    
+    let timerSeconds: UILabel = {
+        let secLabel = UILabel()
+        secLabel.text = "ooo"
+        return secLabel
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -85,6 +92,11 @@ class CustomCell: UITableViewCell {
         timerName.translatesAutoresizingMaskIntoConstraints = false
         timerName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         timerName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+        
+        addSubview(timerSeconds)
+        timerSeconds.translatesAutoresizingMaskIntoConstraints = false
+        timerSeconds.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        timerSeconds.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
     }
     
 }

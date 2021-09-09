@@ -16,7 +16,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let timerSeconds = UITextField()
     let addButton = UIButton()
     let timersVC = TimersChildViewController()
-    var timers = [String]()
+    
+    var timers: [(name: String, seconds: String)] = []
+    var justNames = [String]()
+    var justSeconds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +31,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         createTextFieldForTimerInSeconds()
         createAddButton()
         addTimersChildViewController()
-        timers = UserDefaults.standard.stringArray(forKey: "timerNames")!
+        
+        var tempArray = [(name: String, seconds: String)]()
+        justNames = UserDefaults.standard.stringArray(forKey: "newTimerNames") ?? ["No timers yet"]
+        justSeconds = UserDefaults.standard.stringArray(forKey: "newTimerSeconds") ?? ["00:05"]
+        for i in 0..<justNames.count {
+            tempArray.append((name: justNames[i], seconds: justSeconds[i]))
+        }
+        timers = tempArray
+        
+        if (timers.count > 1 && timers[0].name == "No timers yet") {
+            timers.remove(at: 0)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,12 +166,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func addTimer() {
-        if let newTimerName = timerName.text, !newTimerName.isEmpty {
-            timers.append(newTimerName)
+        if let newTimerName = timerName.text, !newTimerName.isEmpty, !timerSeconds.text!.isEmpty {
+            timers.append((name: newTimerName, seconds: timerSeconds.text!))
             timersVC.timersSaved = timers
             timersVC.tableView.reloadData()
-            UserDefaults.standard.set(timers, forKey: "timerNames")
+            
+            justNames.append(newTimerName)
+            justSeconds.append(timerSeconds.text!)
+            UserDefaults.standard.set(justNames, forKey: "newTimerNames")
+            UserDefaults.standard.set(justSeconds, forKey: "newTimerSeconds")
         }
+        
+        timerName.text = ""
+        timerSeconds.text = ""
     }
 }
 
