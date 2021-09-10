@@ -33,8 +33,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         addTimersChildViewController()
         
         var tempArray = [(name: String, seconds: String)]()
-        justNames = UserDefaults.standard.stringArray(forKey: "newTimerNames") ?? ["No timers yet"]
-        justSeconds = UserDefaults.standard.stringArray(forKey: "newTimerSeconds") ?? ["00:05"]
         for i in 0..<justNames.count {
             tempArray.append((name: justNames[i], seconds: justSeconds[i]))
         }
@@ -175,8 +173,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             justNames.append(newTimerName)
             justSeconds.append(timerSeconds.text!)
-            UserDefaults.standard.set(justNames, forKey: "newTimerNames")
-            UserDefaults.standard.set(justSeconds, forKey: "newTimerSeconds")
         }
         
         timerName.text = ""

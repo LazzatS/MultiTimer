@@ -14,7 +14,6 @@ class TimersChildViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
         view.frame.size.height = 200
         tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
         tableView.register(TimersHeader.self, forHeaderFooterViewReuseIdentifier: "header")
