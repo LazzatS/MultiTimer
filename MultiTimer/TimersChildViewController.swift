@@ -38,6 +38,13 @@ class TimersChildViewController: UITableViewController {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
         return header
     }
+    
+    func deleteCell(cell: UITableViewCell) {
+        if let deletionIndexPath = tableView.indexPath(for: cell) {
+            timersSaved.remove(at: deletionIndexPath.row)
+            tableView.deleteRows(at: [deletionIndexPath], with: .automatic)
+        }
+    }
 }
 
 class TimersHeader: UITableViewHeaderFooterView {
@@ -90,6 +97,12 @@ class CustomCell: UITableViewCell {
         stopButton.setTitleColor(.secondaryLabel, for: .normal)
         return stopButton
     }()
+    
+    let deleteButton: UIButton = {
+        let deleteButton = UIButton(type: .system)
+        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        return deleteButton
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -116,6 +129,12 @@ class CustomCell: UITableViewCell {
         timerSeconds.translatesAutoresizingMaskIntoConstraints = false
         timerSeconds.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         timerSeconds.rightAnchor.constraint(equalTo: stopButton.leftAnchor, constant: -20).isActive = true
+        
+        contentView.addSubview(deleteButton)
+        deleteButton.addTarget(self, action: #selector(handleDeletion), for: .touchUpInside)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        deleteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
     @objc func stopTimer(cell: UITableViewCell) {
@@ -146,5 +165,9 @@ class CustomCell: UITableViewCell {
             }
         timerSeconds.text = timerString
         }
+    }
+    
+    @objc func handleDeletion() {
+        timersTableVC?.deleteCell(cell: self)
     }
 }
