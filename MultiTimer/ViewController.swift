@@ -173,6 +173,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             justNames.append(newTimerName)
             justSeconds.append(timerSeconds.text!)
+            timers.sort(by: {Int($0.seconds) ?? 0 < Int($1.seconds) ?? 0})
+            timers.reverse()
         }
         
         timerName.text = ""
