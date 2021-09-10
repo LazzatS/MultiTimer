@@ -118,22 +118,22 @@ class CustomCell: UITableViewCell {
         timerName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         timerName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         
+        contentView.addSubview(deleteButton)
+        deleteButton.addTarget(self, action: #selector(handleDeletion), for: .touchUpInside)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        
         contentView.addSubview(stopButton)
         stopButton.addTarget(self, action: #selector(stopTimer(cell:)), for: .touchUpInside)
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        stopButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        stopButton.rightAnchor.constraint(equalTo: deleteButton.leftAnchor, constant: -20).isActive = true
         
         addSubview(timerSeconds)
         timerSeconds.translatesAutoresizingMaskIntoConstraints = false
         timerSeconds.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         timerSeconds.rightAnchor.constraint(equalTo: stopButton.leftAnchor, constant: -20).isActive = true
-        
-        contentView.addSubview(deleteButton)
-        deleteButton.addTarget(self, action: #selector(handleDeletion), for: .touchUpInside)
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        deleteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
     @objc func stopTimer(cell: UITableViewCell) {
