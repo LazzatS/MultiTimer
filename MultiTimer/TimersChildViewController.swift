@@ -93,7 +93,7 @@ class CustomCell: UITableViewCell {
     
     let stopButton: UIButton = {
         let stopButton = UIButton(type: .system)
-        stopButton.setTitle("Pause", for: .normal)
+        stopButton.setImage(UIImage(systemName: "play"), for: .normal)
         stopButton.setTitleColor(.secondaryLabel, for: .normal)
         return stopButton
     }()
@@ -142,11 +142,11 @@ class CustomCell: UITableViewCell {
         secondsInt = Int(tempSecString ?? "5") ?? 5
         if isStopped {
             isStopped = false
-            stopButton.setTitle("Stopped", for: .normal)
+            stopButton.setImage(UIImage(systemName: "play"), for: .normal)
             timer.invalidate()
         } else {
             isStopped = true
-            stopButton.setTitle("Pause", for: .normal)
+            stopButton.setImage(UIImage(systemName: "pause"), for: .normal)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countdown), userInfo: nil, repeats: true)
         }
     }
