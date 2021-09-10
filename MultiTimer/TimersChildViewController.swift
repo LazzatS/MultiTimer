@@ -155,14 +155,16 @@ class CustomCell: UITableViewCell {
         let secInt = secondsInt % 60
         var timerString = ""
         
-       if secondsInt > 0 {
+        if secondsInt > 0 {
             secondsInt -= 1
             if (minInt <= 9 && secInt <= 59) {
                 timerString = String(format: "%02d:%02d", minInt, secInt)
             } else if (minInt > 9 && secInt <= 59) {
                 timerString = String(format: "%2d:%2d", minInt, secInt)
             }
-        timerSeconds.text = timerString
+            timerSeconds.text = timerString
+        } else {
+            timersTableVC?.deleteCell(cell: self)
         }
     }
     
