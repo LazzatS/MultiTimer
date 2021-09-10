@@ -10,7 +10,7 @@ import UIKit
 class TimersChildViewController: UITableViewController {
     
     var timersSaved: [(name: String, seconds: String)] = []
-    var secondsSaved = [String]()
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,10 @@ class TimersChildViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
+        cell.timersTableVC = self
         cell.timerName.text = timersSaved[indexPath.row].name
-        cell.timerSeconds.text = timersSaved[indexPath.row].seconds
+        count = Int(timersSaved[indexPath.row].seconds) ?? 5
+        cell.timerSeconds.text = String(count)
         return cell
     }
     
@@ -67,6 +69,11 @@ class TimersHeader: UITableViewHeaderFooterView {
 
 class CustomCell: UITableViewCell {
     
+    var timersTableVC: TimersChildViewController?
+    var timer = Timer()
+    var isStopped = false
+    var secondsInt = 0
+    
     let timerName: UILabel = {
         let label = UILabel()
         return label
@@ -74,10 +81,16 @@ class CustomCell: UITableViewCell {
     
     let timerSeconds: UILabel = {
         let secLabel = UILabel()
-        secLabel.text = "ooo"
         return secLabel
     }()
     
+    let stopButton: UIButton = {
+        let stopButton = UIButton(type: .system)
+        stopButton.setTitle("Pause", for: .normal)
+        stopButton.setTitleColor(.secondaryLabel, for: .normal)
+        return stopButton
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -93,10 +106,45 @@ class CustomCell: UITableViewCell {
         timerName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         timerName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         
+        contentView.addSubview(stopButton)
+        stopButton.addTarget(self, action: #selector(stopTimer(cell:)), for: .touchUpInside)
+        stopButton.translatesAutoresizingMaskIntoConstraints = false
+        stopButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        stopButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        
         addSubview(timerSeconds)
         timerSeconds.translatesAutoresizingMaskIntoConstraints = false
         timerSeconds.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        timerSeconds.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+        timerSeconds.rightAnchor.constraint(equalTo: stopButton.leftAnchor, constant: -20).isActive = true
     }
     
+    @objc func stopTimer(cell: UITableViewCell) {
+        let tempSecString = timerSeconds.text
+        secondsInt = Int(tempSecString ?? "5") ?? 5
+        if isStopped {
+            isStopped = false
+            stopButton.setTitle("Stopped", for: .normal)
+            timer.invalidate()
+        } else {
+            isStopped = true
+            stopButton.setTitle("Pause", for: .normal)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countdown), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func countdown() {
+        let minInt = (secondsInt / 60) % 60
+        let secInt = secondsInt % 60
+        var timerString = ""
+        
+       if secondsInt > 0 {
+            secondsInt -= 1
+            if (minInt <= 9 && secInt <= 59) {
+                timerString = String(format: "%02d:%02d", minInt, secInt)
+            } else if (minInt > 9 && secInt <= 59) {
+                timerString = String(format: "%2d:%2d", minInt, secInt)
+            }
+        timerSeconds.text = timerString
+        }
+    }
 }

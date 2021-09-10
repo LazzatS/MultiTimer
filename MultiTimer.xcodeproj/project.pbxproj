@@ -59,10 +59,10 @@
 				12EB12B026E6323000281488 /* AppDelegate.swift */,
 				12EB12B226E6323000281488 /* SceneDelegate.swift */,
 				12EB12B426E6323000281488 /* ViewController.swift */,
+				122A5CFB26E779DD00D54FBC /* TimersChildViewController.swift */,
 				12EB12B926E6323C00281488 /* Assets.xcassets */,
 				12EB12BB26E6323C00281488 /* LaunchScreen.storyboard */,
 				12EB12BE26E6323C00281488 /* Info.plist */,
-				122A5CFB26E779DD00D54FBC /* TimersChildViewController.swift */,
 			);
 			path = MultiTimer;
 			sourceTree = "<group>";
